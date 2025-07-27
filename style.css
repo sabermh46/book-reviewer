@@ -1,0 +1,370 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+#content {
+  padding: 20px;
+  min-height: calc(100vh - 60px);
+}
+/* Navbar */
+#navbar {
+  background: #ffffff64;
+  padding: 10px;
+  backdrop-filter: blur(3px);
+  padding-bottom: 0px;
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
+}
+nav {
+  background: #2c3e50;
+  padding: 8px 18px;
+  padding-right: 4px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .brand {
+  font-size: min(36px, max(3vw, 18px));
+  line-height:  110%;
+  color: white;
+  padding-bottom: 4px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  font-size:  min(16px, max(2vw, 12px));
+  text-decoration: none;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  background: #00000000;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  background: #000000;
+}
+
+/* Book Grid */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.books-grid.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.book-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+  border: 2px solid rgba(0, 0, 0, 0.117);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-10px);
+}
+
+.book-cover {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid #ddd;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.book-info {
+  padding: 15px;
+}
+
+.book-info h3 {
+  margin: 0 0 5px;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-btn {
+  position: sticky;
+  top: 10px;
+  right: 10px;
+  margin-left: auto;
+  height: 24px;
+  width: 24px;
+  padding: 5px;
+  border-radius: 100px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  background: rgb(189, 189, 189);
+  border: none;
+  cursor: pointer;
+  z-index: 999;
+}
+.close-btn:hover {
+  background: rgb(141, 141, 141);
+}
+.close-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.book-detail {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  padding: 20px;
+}
+
+.book-detail-cover{
+  width: max-content;
+  position: relative;
+  margin: 0 auto;
+}
+
+.book-detail-cover .wishlist-btn {
+  top: 20px;
+  right: -30px;
+}
+
+.book-detail-cover img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px 10px rgba(0,0,0,0.2);
+}
+
+.book-meta p {
+  margin-bottom: 10px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-width: 100%;
+  padding: 0 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: clip;
+  
+}
+
+.search-box {
+  flex: 1;
+  min-width: 150px;
+  max-width: 400px;
+  position: relative;
+  align-self: center;
+  box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+  border-radius: 100px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 100px;
+}
+
+.clear-search {
+  
+  position: absolute;
+  right: 7px;
+  
+  top: 50%;
+  display: grid;
+  place-items: center;
+height: 1.4rem;
+width: 1.4rem;
+  background: #d8d8d8;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #999;
+  transition: 0.5s;
+}
+.clear-search:hover {
+  color: #ffffff;
+  background: black;
+}
+
+.topic-filter {
+  flex: 1;
+  min-width: 120px;
+  max-width: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 100px;
+  box-shadow: 0 0 30px 10px rgba(0,0,0,0.1);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 8px 4px;
+  min-width: 30px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Loading & States */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.error {
+  color: #e74c3c;
+  padding: 20px;
+  background: #fdecea;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.empty-wishlist {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .book-detail {
+    grid-template-columns: 1fr;
+  }
+  
+}
+
+
+.wishlist-btn.red {
+  border: 1px solid #d22;
+  color: rgb(210, 39, 39);
+}
+
+.no-results {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
