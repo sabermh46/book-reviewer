@@ -16,7 +16,9 @@
 
     <div id="book-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn">
+                <img src="assets/close.svg" alt="">
+            </span>
             <div id="book-detail-content"></div>
         </div>
     </div>
@@ -322,7 +324,38 @@
             renderBooks(totalCount) {
                 const grid = document.querySelector('.books-grid');
                 if (!grid) return; // Ensure grid exists before trying to render into it
+                const pagination = document.querySelector('.pagination');
 
+                if (this.books.length === 0) {
+                    grid.classList.add('no-results');
+                    pagination.innerHTML = ``
+                    grid.innerHTML = `
+                        <div class="no-results">
+                            <div class="no-results-icon">🔍</div>
+                            <h3>No books found</h3>
+                            <p>Try adjusting your search or filter criteria</p>
+                            <button class="clear-filters">Clear all filters</button>
+                        </div>
+                    `;
+        
+        // Add event listener for clear filters button
+            grid.querySelector('.clear-filters')?.addEventListener('click', () => {
+                this.searchTerm = '';
+                this.filterTopic = '';
+                this.currentPage = 1;
+                
+                // Clear UI elements
+                const searchInput = document.querySelector('.search-box input');
+                if (searchInput) searchInput.value = '';
+                
+                const topicFilter = document.querySelector('.topic-filter');
+                if (topicFilter) topicFilter.value = '';
+                
+                this.loadBooks();
+            });
+            return;
+        }
+                grid.classList.remove('no-results');
                 grid.innerHTML = this.books.map(book => `
                     <div class="book-card" data-id="${book.id}">
                         <div class="book-cover">
@@ -480,7 +513,14 @@
                 const wishlist = WishlistManager.getWishlist();
 
                 if (wishlist.length === 0) {
-                    content.innerHTML = '<div class="empty-wishlist">Your wishlist is empty</div>';
+                    content.innerHTML = `
+                        <div class="empty-wishlist">
+                            <div class="empty-icon">❤️</div>
+                            <h3>Your wishlist is empty</h3>
+                            <p>Save books you're interested in by clicking the heart icon</p>
+                            <a href="#/home" class="browse-books">Browse books</a>
+                        </div>
+                    `;
                     return;
                 }
 
@@ -501,7 +541,7 @@
                                 <div class="book-card" data-id="${book.id}">
                                     <div class="book-cover">
                                         <img src="${book.formats['image/jpeg'] || 'no-cover.jpg'}" alt="${book.title}">
-                                        <button class="wishlist-btn">❤</button>
+                                        <button class="wishlist-btn red">❤</button>
                                     </div>
                                     <div class="book-info">
                                         <h3>${book.title}</h3>
